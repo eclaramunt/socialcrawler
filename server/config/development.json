@@ -1,0 +1,8 @@
+{
+  "Mongo": {
+    "host": "localhost",
+    "client": "mongodb",
+    "port": 27017,
+    "dbName": "socialcrawler_dev"
+  }
+}
