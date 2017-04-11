@@ -1,6 +1,10 @@
 const express = require('express')
-const app = express()
 var config = require('./config');
+var bodyParser = require('body-parser');
+
+const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 // routes
 var router = require('./router')(app)
