@@ -1,10 +1,10 @@
-import { SocialcrawlerPage } from './app.po';
+import { ClientPage } from './app.po';
 
-describe('socialcrawler App', () => {
-  let page: SocialcrawlerPage;
+describe('client App', () => {
+  let page: ClientPage;
 
   beforeEach(() => {
-    page = new SocialcrawlerPage();
+    page = new ClientPage();
   });
 
   it('should display message saying app works', () => {
