@@ -1,6 +1,8 @@
 var http = require('http')
 var request = require('request')
 var User = require('../models/user')
+var myLogClass = require('../utils/logger');
+var logger = new myLogClass();
 
 exports.listUsers = function (req, res) {
   User.find({}, function (error, users) {
@@ -29,6 +31,7 @@ exports.addUser = function (req, res) {
       newUser.email = req.body.email
       newUser.firstName = req.body.firstName
       newUser.lastName = req.body.lastName
+      newUser.password = req.body.password;
       newUser.save(function (err) {
         if (err) {
           logger.error('Error al añadir usuario: ' + newUser.email + ' el error es:')

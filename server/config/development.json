@@ -4,5 +4,8 @@
     "client": "mongodb",
     "port": 27017,
     "dbName": "socialcrawler_dev"
+  },
+  "Log4js": {
+    "confPath": "log4js_config.json"
   }
 }

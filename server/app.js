@@ -2,9 +2,14 @@ const express = require('express')
 var config = require('./config');
 var bodyParser = require('body-parser');
 
+var passport = require('passport');
+
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
+// passport inicializacion
+app.use(passport.initialize());
 
 // error handling
 app.use(function (err, req, res, next) {
