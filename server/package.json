@@ -11,11 +11,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "log4js": "^1.1.1",
     "mongoose": "^4.9.4",
-    "request": "^2.81.0"
+    "passport": "^0.3.2",
+    "request": "^2.81.0",
+    "var": "^0.2.0"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
