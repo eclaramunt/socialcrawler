@@ -8,7 +8,8 @@ var UserSchema = new Schema({
     email: String,
     firstName: String,
     lastName: String,
-    password: String
+    password: String,
+    tokens: [String]
 });
 
 //hook para encriptar el password del usuario cuando se crea
