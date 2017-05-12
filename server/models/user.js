@@ -9,7 +9,8 @@ var UserSchema = new Schema({
     firstName: String,
     lastName: String,
     password: String,
-    tokens: [String]
+    tokens: [String],
+    accounts: [{ type: Schema.ObjectId, ref: "Account" }]
 });
 
 //hook para encriptar el password del usuario cuando se crea
