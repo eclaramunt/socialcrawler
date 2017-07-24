@@ -10,4 +10,4 @@ var AccountSchema = new Schema({
   type: String
 });
 
-module.exports = mongoose.model('Account', Account);
+module.exports = mongoose.model('Account', AccountSchema);

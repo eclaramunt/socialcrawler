@@ -1,8 +1,8 @@
-var authorizationController = require('../../controllers/'),
+var accountController = require('../../controllers/accountController'),
   express = require('express'),
   router = express.Router()
 
 router.route('/')
-  .post(authorizationController.login);
+  .get(accountController.getAccounts);
 
 module.exports = router
