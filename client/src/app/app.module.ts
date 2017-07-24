@@ -16,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 
 // services
 import { AuthenticationService } from './_services/authentication.services';
+import { AccountService } from './_services/account.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { AuthenticationService } from './_services/authentication.services';
   ],
   providers: [
     AuthGuard,
-    AuthenticationService
+    AuthenticationService,
+    AccountService
   ],
   bootstrap: [AppComponent]
 })
