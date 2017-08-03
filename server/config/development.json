@@ -7,5 +7,10 @@
   },
   "Log4js": {
     "confPath": "log4js_config.json"
+  },
+  "Auth": {
+    "tokenSecret": "p7b2Xw29t0GkjE7ds68KTm2E3nD6N5uI",
+    "tokenTimeStamp": 86400,
+    "key_seed": "p7b2Xw29t0GkjE7ds68KTm2E3nD6N5uI"
   }
 }

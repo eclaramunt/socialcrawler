@@ -8,7 +8,10 @@ export const environment = {
   server: {
     base: 'http://localhost:3000',
     urls: {
-      login: '/authorization'
+      login: '/authorization',
+      accounts: {
+        get: '/accounts'
+      }
     }
   }
 };
