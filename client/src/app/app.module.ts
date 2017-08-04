@@ -13,6 +13,7 @@ import { AuthGuard } from './_guards/auth.guards';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { AccountComponent } from './account/account.component';
 
 // services
 import { AuthenticationService } from './_services/authentication.services';
@@ -22,7 +23,8 @@ import { AccountService } from './_services/account.service';
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,

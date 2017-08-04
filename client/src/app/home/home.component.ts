@@ -1,4 +1,3 @@
-import { AccountService } from '../_services/account.service';
 import { Component, OnInit } from '@angular/core';
 import { Account } from '../_models/account';
 
@@ -7,16 +6,10 @@ import { Account } from '../_models/account';
 })
 
 export class HomeComponent implements OnInit {
-  constructor(private accountService: AccountService) { }
-  accounts: Account[];
+  constructor() { }
 
-  getAccounts(): void {
-    this.accountService
-      .getAccounts()
-      .then(accounts => this.accounts = accounts);
-  }
-  
+
   ngOnInit() {
-    this.getAccounts();
+
   }
 }
