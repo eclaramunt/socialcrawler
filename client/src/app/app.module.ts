@@ -13,29 +13,29 @@ import { AuthGuard } from './_guards/auth.guards';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { AccountComponent } from './account/account.component';
 
 // services
 import { AuthenticationService } from './_services/authentication.services';
-import { AccountService } from './_services/account.service';
+
+// modules
+import { AccountsModule } from './_modules/accounts.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent,
-    AccountComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    AccountsModule,
     routing
   ],
   providers: [
     AuthGuard,
-    AuthenticationService,
-    AccountService
+    AuthenticationService
   ],
   bootstrap: [AppComponent]
 })

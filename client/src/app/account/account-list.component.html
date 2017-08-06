@@ -1,0 +1,16 @@
+<div class="col-md-6 col-md-offset-3">
+  <h1>Cuentas configuradas</h1>
+  <table class="table">
+    <thead>
+      <th>ID</th>
+      <th>Tipo</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let account of accounts">
+        <td>{{account._id}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<button class="btn" [routerLink]="['/accounts/add']">Agregar Cuenta</button>

@@ -3,6 +3,6 @@ var accountController = require('../../controllers/accountController'),
   router = express.Router()
 
 router.route('/')
-  .get(accountController.getAccounts);
+  .get(accountController.getAccounts)
 
 module.exports = router

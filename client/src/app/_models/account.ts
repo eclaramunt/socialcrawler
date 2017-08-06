@@ -1,4 +1,7 @@
 export class Account {
-  source: String;
-  token: String;
+  constructor(
+    public id: number,
+    public name: string,
+    public type: string
+  ) { }
 }

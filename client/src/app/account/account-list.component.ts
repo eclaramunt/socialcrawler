@@ -3,10 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { Account } from '../_models/account';
 
 @Component({
-    templateUrl: 'account.component.html'
+    templateUrl: 'account-list.component.html'
 })
 
-export class AccountComponent implements OnInit {
+export class AccountListComponent implements OnInit {
     constructor(private accountService: AccountService) { }
     accounts: Account[];
 
