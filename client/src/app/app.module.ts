@@ -19,6 +19,7 @@ import { AuthenticationService } from './_services/authentication.services';
 
 // modules
 import { AccountsModule } from './_modules/accounts.module';
+import { FacebookModule } from 'ngx-facebook';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { AccountsModule } from './_modules/accounts.module';
     FormsModule,
     HttpModule,
     AccountsModule,
-    routing
+    routing,
+    FacebookModule.forRoot()
   ],
   providers: [
     AuthGuard,

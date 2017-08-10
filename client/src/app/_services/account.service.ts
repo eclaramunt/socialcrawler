@@ -13,6 +13,10 @@ export class AccountService {
 
   constructor(private http: Http) { }
 
+  fb(): void {
+    this.http.post('http://localhost:3000/users/1/accounts', {}).toPromise().then(response => console.log(response))
+  }
+
   getAccounts(): Promise<Account[]> {
     return this.http.get(environment.server.base + environment.server.urls.accounts.get)
       .toPromise()
