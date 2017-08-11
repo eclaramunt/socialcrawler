@@ -4,12 +4,24 @@ var bodyParser = require('body-parser');
 
 var passport = require('passport');
 
+// estrategias
+var FacebookStrategy = require('passport-facebook').Strategy;
+
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 // passport inicializacion
 app.use(passport.initialize());
+
+passport.use(new FacebookStrategy({
+  clientID: 2012751978958165,
+  clientSecret: '5c3826407d81c8218b6c70b1ffbb3baa'
+}, function (accessToken, refreshToken, profile, cb) {
+  console.log(accessToken);
+  console.log(refreshToken);
+  console.log(profile);
+}));
 
 // error handling
 app.use(function (err, req, res, next) {
