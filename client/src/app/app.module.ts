@@ -16,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 
 // services
 import { AuthenticationService } from './_services/authentication.services';
+import { fbService } from './_services/fb.service';
 
 // modules
 import { AccountsModule } from './_modules/accounts.module';
@@ -37,7 +38,8 @@ import { FacebookModule } from 'ngx-facebook';
   ],
   providers: [
     AuthGuard,
-    AuthenticationService
+    AuthenticationService,
+    fbService
   ],
   bootstrap: [AppComponent]
 })

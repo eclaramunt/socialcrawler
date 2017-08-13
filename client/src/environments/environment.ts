@@ -9,8 +9,10 @@ export const environment = {
     base: 'http://localhost:3000',
     urls: {
       login: '/authorization',
-      accounts: {
-        get: '/accounts'
+      users: {
+        accounts: {
+          get: '/users/:id/accounts'
+        }
       }
     }
   }
