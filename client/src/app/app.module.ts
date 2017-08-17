@@ -22,6 +22,11 @@ import { fbService } from './_services/fb.service';
 import { AccountsModule } from './_modules/accounts.module';
 import { FacebookModule } from 'ngx-facebook';
 
+// materialize-css
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterializeModule } from 'ng2-materialize';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +39,10 @@ import { FacebookModule } from 'ngx-facebook';
     HttpModule,
     AccountsModule,
     routing,
-    FacebookModule.forRoot()
+    FacebookModule.forRoot(),
+    NgbModule.forRoot(),
+    BrowserAnimationsModule,
+    MaterializeModule.forRoot(),
   ],
   providers: [
     AuthGuard,
