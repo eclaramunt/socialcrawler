@@ -1,9 +1,11 @@
-<div class="col-md-6 col-md-offset-3">
-  <h1>Cuentas configuradas</h1>
-  <table class="table">
+
+<h1>Cuentas configuradas</h1>
+  <table class="table table-bordered" *ngIf="accounts.length > 0">
     <thead>
-      <th>ID</th>
-      <th>Tipo</th>
+      <tr>
+        <th>ID</th>
+        <th>Tipo</th>
+      </tr>
     </thead>
     <tbody>
       <tr *ngFor="let account of accounts">
@@ -12,7 +14,4 @@
       </tr>
     </tbody>
   </table>
-</div>
-
-<a href="http://localhost:3000/users/12/account/facebook">Facebook !</a>
-<button class="btn" [routerLink]="['/accounts/add']">Agregar Cuenta</button>
+<button class="btn btn-primary" [routerLink]="['/accounts/add']">Agregar Cuenta</button>

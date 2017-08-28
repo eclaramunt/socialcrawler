@@ -8,9 +8,9 @@ import { AccountAddComponent } from '../account/account-add.component';
 import { AuthGuard } from '../_guards/auth.guards';
 
 const heroesRoutes: Routes = [
-  { path: 'accounts', component: AccountListComponent },
-  { path: 'accounts/add', component: AccountAddComponent },
-  { path: 'account/:id', component: AccountDetailComponent }
+  { path: 'accounts', component: AccountListComponent, canActivate: [AuthGuard] },
+  { path: 'accounts/add', component: AccountAddComponent, canActivate: [AuthGuard] },
+  { path: 'account/:id', component: AccountDetailComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

@@ -7,8 +7,9 @@ import { Account } from '../_models/account';
 })
 
 export class AccountListComponent implements OnInit {
+    accounts: Account[] = [];
+
     constructor(private accountService: AccountService) { }
-    accounts: Account[];
 
     getAccounts(): void {
         this.accountService
