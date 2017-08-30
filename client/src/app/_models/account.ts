@@ -1,5 +1,8 @@
 export class Account {
-  constructor(
-    public type: string
-  ) { }
+  constructor() { }
+
+  getEntries() {  
+    return 'lalalala';
+  }
+  
 }
