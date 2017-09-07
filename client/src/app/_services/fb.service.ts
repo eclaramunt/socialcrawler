@@ -19,7 +19,7 @@ export class fbService {
     fb.init(initParams);
   }
 
-  getLoginStatus(): Promise<boolean> {
+  isLoggin(): Promise<boolean> {
     return this.fb.getLoginStatus()
       .then((response: LoginStatus) => {
         return response.status === 'connected';
@@ -40,9 +40,28 @@ export class fbService {
       .catch((error: any) => console.error(error));
   }
 
-  me(): void {
-    this.fb.api('me?fields=albums.limit(5),posts.limit(5)')
-      .then(res => console.log(res))
+  attachments(post_id) {
+    let attachments = [];
+    return this.fb.api(post_id + '/attachments').then(
+      (res) => {
+        if (res.data[0].media) {
+          attachments.push(res.data[0].media.image.src);
+        }
+        else {
+          if (res.data[0].subattachments) {
+            res.data[0].subattachments.data.forEach((element) => {
+              attachments.push(element.media.image.src);
+            })
+          }
+        }
+        return attachments;
+      }
+    ).catch(e => console.log(e));
+  }
+
+  me() {
+    return this.fb.api('me?fields=posts.limit(5)')
+      .then(res => res.posts)
       .catch(e => console.log(e));
   }
 }
