@@ -8,21 +8,32 @@ import { AccountService } from '../_services/account.service';
 })
 
 export class HomeComponent implements OnInit {
-  constructor(private fbService: fbService, private accountService: AccountService) { }
+  entries = [];
+  constructor(private facebookService: fbService, private accountService: AccountService) { }
 
   addTwitter() {
     console.log('hizo click');
   }
-  
-  ngOnInit() {
-    this.accountService.getAccounts().then(accounts => {
-      
-      accounts.forEach(function (account: Account) {
-        let ac = account as Account;
-        console.log(ac.getEntries());
 
-        let ac2 = new Account();
-        console.log(ac2.getEntries());
+  ngOnInit() {
+    this.accountService.getAccounts().subscribe(accounts => {
+      accounts.forEach((account: Account) => {
+        if (account.isFacebook()) {
+          //verifico si esta logueado
+          this.facebookService.isLoggin().then(res => {
+            this.facebookService.me().then(entries => {
+              entries.data.forEach((entry) => {
+                //obtengo los attachments para este entry
+                this.facebookService.attachments(entry.id).then(attachments => {
+                  this.entries.push({
+                    title: entry.message,
+                    attachments: attachments,
+                  })
+                })
+              })
+            })
+          })
+        }
       })
     })
   }

@@ -19,7 +19,7 @@ export class AccountAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.fbService.getLoginStatus();
+    this.fbService.isLoggin();
   }
 
 }

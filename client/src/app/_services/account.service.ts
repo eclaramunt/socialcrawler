@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
-import 'rxjs/add/operator/toPromise';
 import { Account } from '../_models/account';
 import { environment } from '../../environments/environment';
 import { User } from '../_models/user';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class AccountService {
@@ -13,13 +13,11 @@ export class AccountService {
 
   constructor(private http: Http) { }
 
-  getAccounts(): Promise<Account[]> {
+  getAccounts(): Observable<Account[]> {
     let headers = new Headers({ 'Authorization': 'Bearer ' + JSON.parse(localStorage.getItem('currentUser')).token })
     let user_id = JSON.parse(localStorage.getItem('currentUser')).user;
     return this.http.get(environment.server.base + environment.server.urls.users.accounts.get.replace(':id', user_id), { headers: headers })
-      .toPromise()
-      .then(response => response.json().data as Account[])
-      .catch(this.handleError);
+      .map(response => Account.fromJSONArray(response.json().data))
   }
 
   addAccount(object): Promise<Account> {
