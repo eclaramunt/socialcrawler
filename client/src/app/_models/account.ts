@@ -9,17 +9,7 @@ export class Account {
     return array.map(obj => new Account(obj));
   }
 
-  getEntries() {
-    if (this.type == 'facebook') {
-
-    }
-    return 'lalala';
-  }
-
   isFacebook(): boolean {
     return this.type === 'facebook';
   }
-
-
-
 }

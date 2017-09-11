@@ -11,10 +11,6 @@ export class HomeComponent implements OnInit {
   entries = [];
   constructor(private facebookService: fbService, private accountService: AccountService) { }
 
-  getFacebookPicture(post_id) {
-
-  }
-
   ngOnInit() {
     this.accountService.getAccounts().subscribe(accounts => {
       accounts.forEach((account: Account) => {
@@ -28,6 +24,7 @@ export class HomeComponent implements OnInit {
                   this.entries.push({
                     title: entry.message,
                     attachments: attachments,
+                    created_at: entry.created_time
                   })
                 })
               })
