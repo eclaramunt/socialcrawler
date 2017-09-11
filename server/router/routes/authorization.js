@@ -5,4 +5,7 @@ var authorizationController = require('../../controllers/authorizationController
 router.route('/')
   .post(authorizationController.login);
 
+router.route('/twitter')
+  .get(authorizationController.twitter)
+
 module.exports = router

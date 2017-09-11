@@ -2,11 +2,12 @@ var userController = require('../../controllers/userController'),
   express = require('express'),
   router = express.Router(),
   accountController = require('../../controllers/accountController'),
-  authorizationController = require('../../controllers/authorizationController');
+  authorizationController = require('../../controllers/authorizationController'),
+  passport = require('passport');
 
 router.route('/')
   .get(userController.listUsers)
-  .post(userController.addUser);
+  .post(userController.addUser)
 
 router.route('/:user/accounts')
   .get(accountController.getAccounts)

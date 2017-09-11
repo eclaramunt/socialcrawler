@@ -3,12 +3,19 @@ var config = require('./config');
 var bodyParser = require('body-parser');
 
 var passport = require('passport');
+var session = require('express-session')
 
 // estrategias
 var FacebookStrategy = require('passport-facebook').Strategy;
 
 const app = express();
 app.use(bodyParser.json());
+app.use(session({
+  secret: 'a secret',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
 app.use(bodyParser.urlencoded({extended: true}));
 
 // passport inicializacion

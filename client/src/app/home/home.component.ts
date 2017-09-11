@@ -11,10 +11,6 @@ export class HomeComponent implements OnInit {
   entries = [];
   constructor(private facebookService: fbService, private accountService: AccountService) { }
 
-  addTwitter() {
-    console.log('hizo click');
-  }
-
   ngOnInit() {
     this.accountService.getAccounts().subscribe(accounts => {
       accounts.forEach((account: Account) => {

@@ -75,6 +75,12 @@ exports.login = function (req, res, next) {
   })
 }
 
+exports.twitter = function (req, res, next) {
+  console.log('esto no se porque, pero esta funcionando');
+  console.log(req.user);
+  next();
+}
+
 passport.use(new BearerStrategy({passReqToCallback: true}, // pasamos el req para devolver el usuario
   function (req, token, done) {
     jwt.verify(token, config.Auth.tokenSecret,
@@ -109,12 +115,22 @@ exports.isUserAuthenticate = passport.authenticate('bearer', {session: false})
 
 passport.use(new TwitterStrategy({
   consumerKey:"NFdRuIMvNyR0zSYm8Fb8marg4",
-  consumerSecret: "TWITTER_CONSUMER_SECRET",
-  callbackURL: "http://localhost:3000/auth/twitter/callback"
+  consumerSecret: "bCy8SzLFS1Iyvzep95QFx9oqVFalEcVje2cgREVZNL9oHM9iVq",
+  callbackURL: "http://127.0.0.1:3000/authorization/twitter"
 },
   function (token, tokenSecret, profile, cb) {
+    console.log('aca tengo el profile');
+    console.log(profile);
     return cb(null, profile);
   }
 ));
+
+passport.serializeUser(function (user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function (obj, cb) {
+  cb(null, obj);
+});
 
 exports.twitterLogin = passport.authenticate('twitter')
