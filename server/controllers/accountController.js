@@ -62,3 +62,8 @@ exports.getAccounts = function (req, res) {
     return res.status(200).json({data: accounts})
   })
 }
+
+exports.addTwitterAccount = function (req, res) {
+  console.log('aca llego');
+  return res.json({ message: 'Funciono !!' });
+}

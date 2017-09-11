@@ -10,6 +10,10 @@ import { AccountService } from '../_services/account.service';
 export class HomeComponent implements OnInit {
   constructor(private fbService: fbService, private accountService: AccountService) { }
 
+  addTwitter() {
+    console.log('hizo click');
+  }
+  
   ngOnInit() {
     this.accountService.getAccounts().then(accounts => {
       

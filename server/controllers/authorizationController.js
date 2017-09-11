@@ -4,7 +4,7 @@ var bCrypt = require('bcrypt-nodejs')
 var jwt = require('jsonwebtoken')
 var passport = require('passport')
 var BearerStrategy = require('passport-http-bearer').Strategy
-
+var TwitterStrategy = require('passport-twitter').Strategy
 var User = require('../models/user')
 
 var myLogClass = require('../utils/logger')
@@ -105,3 +105,16 @@ passport.use(new BearerStrategy({passReqToCallback: true}, // pasamos el req par
 )
 
 exports.isUserAuthenticate = passport.authenticate('bearer', {session: false})
+
+
+passport.use(new TwitterStrategy({
+  consumerKey:"NFdRuIMvNyR0zSYm8Fb8marg4",
+  consumerSecret: "TWITTER_CONSUMER_SECRET",
+  callbackURL: "http://localhost:3000/auth/twitter/callback"
+},
+  function (token, tokenSecret, profile, cb) {
+    return cb(null, profile);
+  }
+));
+
+exports.twitterLogin = passport.authenticate('twitter')
