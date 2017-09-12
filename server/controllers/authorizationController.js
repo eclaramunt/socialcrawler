@@ -6,6 +6,7 @@ var passport = require('passport')
 var BearerStrategy = require('passport-http-bearer').Strategy
 var TwitterStrategy = require('passport-twitter').Strategy
 var User = require('../models/user')
+var Account = require('../models/account')
 
 var myLogClass = require('../utils/logger')
 var logger = new myLogClass()
@@ -75,12 +76,6 @@ exports.login = function (req, res, next) {
   })
 }
 
-exports.twitter = function (req, res, next) {
-  console.log('esto no se porque, pero esta funcionando');
-  console.log(req.user);
-  next();
-}
-
 passport.use(new BearerStrategy({passReqToCallback: true}, // pasamos el req para devolver el usuario
   function (req, token, done) {
     jwt.verify(token, config.Auth.tokenSecret,
@@ -112,25 +107,50 @@ passport.use(new BearerStrategy({passReqToCallback: true}, // pasamos el req par
 
 exports.isUserAuthenticate = passport.authenticate('bearer', {session: false})
 
-
 passport.use(new TwitterStrategy({
-  consumerKey:"NFdRuIMvNyR0zSYm8Fb8marg4",
-  consumerSecret: "bCy8SzLFS1Iyvzep95QFx9oqVFalEcVje2cgREVZNL9oHM9iVq",
-  callbackURL: "http://127.0.0.1:3000/authorization/twitter"
+  consumerKey: 'NFdRuIMvNyR0zSYm8Fb8marg4',
+  consumerSecret: 'bCy8SzLFS1Iyvzep95QFx9oqVFalEcVje2cgREVZNL9oHM9iVq',
+  passReqToCallback: true
 },
-  function (token, tokenSecret, profile, cb) {
-    console.log('aca tengo el profile');
-    console.log(profile);
-    return cb(null, profile);
+  function (req, token, tokenSecret, profile, cb) {
+    // Verifico si existe el usuario o sino lo creo
+    User.find({_id: req.params.id}, function (error, user) {
+      if (error) {
+        logger.error('Ocurrio un error al buscar al usuario')
+        logger.error(error)
+        return cb(error)
+      }
+      if (!user) {
+        logger.error('No existe el usuario !!')
+        return cb(error)
+      }
+      user = user[0]
+      // Busco la cuenta para este usuario de twitter
+      Account.find({User: user, type: 'twitter', profile_id: profile.id}, function (error, account) {
+        if (error) {
+          logger.error('Ocurrio un error al buscar la cuenta')
+          logger.error(error)
+          return cb(error)
+        }
+        if (!account) {
+          logger.info('La cuenta de Twitter no esta configurada para el usuario')
+          logger.info('Creando una cuenta en twitter ...')
+          return cb(null, user)
+        }else {
+          logger.info('Logueando al usuario con su cuenta en Twitter')
+          return cb(null, user)
+        }
+      })
+    })
   }
-));
+))
 
 passport.serializeUser(function (user, cb) {
-  cb(null, user);
-});
+  cb(null, user)
+})
 
 passport.deserializeUser(function (obj, cb) {
-  cb(null, obj);
-});
+  cb(null, obj)
+})
 
 exports.twitterLogin = passport.authenticate('twitter')
