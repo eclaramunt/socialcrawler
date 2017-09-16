@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
                   this.entries.push({
                     title: entry.message,
                     attachments: attachments,
+                    created_at: entry.created_time
                   })
                 })
               })
