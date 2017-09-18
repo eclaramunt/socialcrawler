@@ -3,7 +3,7 @@ var userController = require('../../controllers/userController'),
   router = express.Router(),
   accountController = require('../../controllers/accountController'),
   authorizationController = require('../../controllers/authorizationController'),
-  passport = require('passport');
+  passport = require('passport')
 
 router.route('/')
   .get(userController.listUsers)
@@ -14,6 +14,6 @@ router.route('/:user/accounts')
   .post(accountController.createAccount)
 
 router.route('/:user/accounts/twitter')
-  .get(authorizationController.twitterLogin, accountController.addTwitterAccount)
+  .get(authorizationController.isUserAuthenticate, authorizationController.twitterLogin, accountController.addTwitterAccount)
 
 module.exports = router

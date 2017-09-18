@@ -4,6 +4,7 @@ var User = require('../models/user')
 var Account = require('../models/account')
 var myLogClass = require('../utils/logger')
 var logger = new myLogClass()
+var passport = require('passport')
 
 exports.createAccount = function (req, res) {
   // obtengo el usuario del parametro y reviso si tiene el mismo token
@@ -61,6 +62,10 @@ exports.getAccounts = function (req, res) {
   })
 }
 
-exports.addTwitterAccount = function (req, res) {
+exports.addTwitterAccount = function (req, res, next) {
+  console.log('en el final')
+  console.log(req.body)
+  console.log(req.user)
+  console.log(req.params)
   return res.json({ message: 'Funciono !!' })
 }

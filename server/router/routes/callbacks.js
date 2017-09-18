@@ -4,8 +4,9 @@ var authorizationController = require('../../controllers/authorizationController
 
 router.route('/callbacks/twitter')
   .get(authorizationController.twitterLogin, function (req, res, next) {
-    console.log(req.user)
-    return res.json({message: 'final'})
+    console.log(req.body)
+    console.log(req.params)
+    return res.json({message: 'final en callbacks'})
   })
 
 module.exports = router
