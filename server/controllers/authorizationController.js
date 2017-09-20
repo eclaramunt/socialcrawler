@@ -113,9 +113,8 @@ passport.use(new TwitterStrategy({
   passReqToCallback: true
 },
   function (req, token, tokenSecret, profile, cb) {
-    console.log(req.body)
-    console.log(req.params)
-
+    console.log('esta funcion no se llama NUNCA !!!')
+    console.log(req.user)
     User.findOne({}, function (error, user) {
       return cb(null, user)
     })
@@ -164,5 +163,10 @@ passport.deserializeUser(function (obj, cb) {
 })
 
 exports.twitterLogin = function (req, res, next) {
+  console.log('entro a twitterLogin')
+  var prueba = req.params.user
+  // console.log(prueba)
+  console.log(req.params)
+  req.user = 'pepita la pistolerita'
   passport.authenticate('twitter')(req, res, next)
 }
