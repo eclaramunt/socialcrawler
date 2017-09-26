@@ -14,6 +14,9 @@ router.route('/:user/accounts')
   .post(accountController.createAccount)
 
 router.route('/:user/accounts/twitter')
-  .get(authorizationController.twitterLogin, accountController.addTwitterAccount)
+  .get(authorizationController.twitterLogin)
+
+router.route('/:user/accounts/twitters')
+  .get(accountController.getTwitters)
 
 module.exports = router

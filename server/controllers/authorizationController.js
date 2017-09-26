@@ -113,13 +113,8 @@ passport.use(new TwitterStrategy({
   passReqToCallback: true
 },
   function (req, token, tokenSecret, profile, cb) {
-    console.log('esta funcion no se llama NUNCA !!!')
-    console.log(req.user)
-    User.findOne({}, function (error, user) {
-      return cb(null, user)
-    })
   // Verifico si existe el usuario o sino lo creo
-  /*User.find({_id: req.params.id}, function (error, users) {
+  User.find({_id: req.session.user_id}, function (error, users) {
     if (error) {
       logger.error('Ocurrio un error al buscar al usuario')
       logger.error(error)
@@ -142,7 +137,21 @@ passport.use(new TwitterStrategy({
       if (!accounts.length) {
         logger.info('La cuenta de Twitter no esta configurada para el usuario')
         logger.info('Creando una cuenta en twitter ...')
-        return cb(null, user)
+        let ac = new Account();
+        ac.type = 'twitter';
+        ac.profile_id = profile.id;
+        ac.User = user;
+        ac.access_token = token;
+        ac.access_token_secret = tokenSecret;
+        ac.save(function (error, account) {
+          if (error) {
+            logger.error('Ocurrio un error al crear la cuenta para el usuario')
+            logger.error(error);
+          }
+          logger.info('Cuenta creada en Twitter para el usuario');
+          logger.info(account);
+          return cb(null, user)
+        })
       } else {
         console.log('la account que encontre es ')
         console.log(accounts)
@@ -150,7 +159,7 @@ passport.use(new TwitterStrategy({
         return cb(null, user)
       }
     })
-  })*/
+  })
   }
 ))
 
@@ -163,10 +172,8 @@ passport.deserializeUser(function (obj, cb) {
 })
 
 exports.twitterLogin = function (req, res, next) {
-  console.log('entro a twitterLogin')
-  var prueba = req.params.user
-  // console.log(prueba)
-  console.log(req.params)
-  req.user = 'pepita la pistolerita'
+  if (req.params.user) {
+    req.session.user_id = req.params.user;
+  }
   passport.authenticate('twitter')(req, res, next)
 }

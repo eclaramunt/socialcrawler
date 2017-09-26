@@ -11,7 +11,8 @@ export const environment = {
       login: '/authorization',
       users: {
         accounts: {
-          get: '/users/:id/accounts'
+          get: '/users/:id/accounts',
+          twitters: '/users/:id/accounts/twitters'
         }
       }
     }

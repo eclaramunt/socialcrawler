@@ -7,7 +7,10 @@ var Schema = mongoose.Schema
 var AccountSchema = new Schema({
   type: String,
   facebook_id: String,
+  profile_id: String,
   User: { type: Schema.ObjectId, ref: "User" },
+  access_token: String,
+  access_token_secret: String
 })
 
 module.exports = mongoose.model('Account', AccountSchema)

@@ -5,6 +5,7 @@ var Account = require('../models/account')
 var myLogClass = require('../utils/logger')
 var logger = new myLogClass()
 var passport = require('passport')
+var request = require('request');
 
 exports.createAccount = function (req, res) {
   // obtengo el usuario del parametro y reviso si tiene el mismo token
@@ -42,7 +43,7 @@ exports.createAccount = function (req, res) {
             data: account
           })
         })
-      }else {
+      } else {
         return res.status(200).json({
           message: 'Cuenta ya existente',
           data: accounts[0]
@@ -62,10 +63,29 @@ exports.getAccounts = function (req, res) {
   })
 }
 
-exports.addTwitterAccount = function (req, res, next) {
-  console.log('en el final')
-  console.log(req.body)
-  console.log(req.user)
-  console.log(req.params)
-  return res.json({ message: 'Funciono !!' })
+exports.getTwitters = function (req, res) {
+  var Twitter = require('twitter');
+
+  Account.find({ type: "twitter", User: req.params.user }, function (error, accounts) {
+    if (error) {
+      logger.error('Ocurrio un error al buscar la cuenta')
+      logger.error(error)
+    }
+    let cuenta = accounts[0]
+    var client = new Twitter({
+      consumer_key: 'NFdRuIMvNyR0zSYm8Fb8marg4',
+      consumer_secret: 'bCy8SzLFS1Iyvzep95QFx9oqVFalEcVje2cgREVZNL9oHM9iVq',
+      access_token_key: cuenta.access_token,
+      access_token_secret: cuenta.access_token_secret
+    });
+
+    var params = { user_id: cuenta.profile_id };
+    console.log('voy a llamar aca')
+    client.get('statuses/home_timeline', params, function (error, tweets, response) {
+      console.log(error);
+      if (!error) {
+        return res.json({ data: tweets });
+      }
+    });
+  })
 }
