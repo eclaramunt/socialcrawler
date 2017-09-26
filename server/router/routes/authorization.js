@@ -3,9 +3,6 @@ var authorizationController = require('../../controllers/authorizationController
   router = express.Router()
 
 router.route('/')
-  .post(authorizationController.login);
-
-router.route('/twitter')
-  .get(authorizationController.twitter)
+  .post(authorizationController.login)
 
 module.exports = router

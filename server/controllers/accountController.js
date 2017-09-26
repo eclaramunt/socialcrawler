@@ -4,6 +4,7 @@ var User = require('../models/user')
 var Account = require('../models/account')
 var myLogClass = require('../utils/logger')
 var logger = new myLogClass()
+var passport = require('passport')
 
 exports.createAccount = function (req, res) {
   // obtengo el usuario del parametro y reviso si tiene el mismo token
@@ -24,36 +25,34 @@ exports.createAccount = function (req, res) {
       })
     }
     // obtenido el usuario, verifico si ya tiene una cuenta
-    Account.find({ User: user, type: "facebook" }, function (error, accounts) {
+    Account.find({ User: user, type: 'facebook' }, function (error, accounts) {
       if (accounts.length == 0) {
-        //El usuario no tenia una cuenta de facebook
-        var newAccount = new Account();
-        newAccount.type = 'facebook';
-        newAccount.User = user;
+        // El usuario no tenia una cuenta de facebook
+        var newAccount = new Account()
+        newAccount.type = 'facebook'
+        newAccount.User = user
         newAccount.facebook_id = req.body.facebook_id
         newAccount.save(function (error, account) {
           if (error) {
-            logger.error('Ocurrio un error al guardar la cuenta');
-            logger.error(error);
+            logger.error('Ocurrio un error al guardar la cuenta')
+            logger.error(error)
           }
           return res.status(200).json({
-            message: "Cuenta añadida correctamente",
+            message: 'Cuenta añadida correctamente',
             data: account
-          });
-        });
-      }
-      else {
+          })
+        })
+      }else {
         return res.status(200).json({
-          message: "Cuenta ya existente",
+          message: 'Cuenta ya existente',
           data: accounts[0]
-        });
+        })
       }
     })
   })
 }
 
 exports.getAccounts = function (req, res) {
-  
   Account.find({ User: req.params.user }, function (error, accounts) {
     if (error) {
       logger.error('Ocurrio un error al traer las cuentas')
@@ -63,7 +62,10 @@ exports.getAccounts = function (req, res) {
   })
 }
 
-exports.addTwitterAccount = function (req, res) {
-  console.log('aca llego');
-  return res.json({ message: 'Funciono !!' });
+exports.addTwitterAccount = function (req, res, next) {
+  console.log('en el final')
+  console.log(req.body)
+  console.log(req.user)
+  console.log(req.params)
+  return res.json({ message: 'Funciono !!' })
 }
