@@ -2,7 +2,7 @@
   <div class="col-md-3" *ngFor="let entry of entries">
     <div class="card">
       <div class="card-header">
-        {{entry.title}} <span class="pull-right"><i class="fa fa-facebook"></i></span>
+        {{entry.title}} <span class="pull-right"><i *ngIf="entry.type == 'facebook'" class="fa fa-facebook"></i><i *ngIf="entry.type == 'twitter'" class="fa fa-twitter"></i></span>
       </div>
       <div class="card-block">
         <p class="card-text">
@@ -11,4 +11,8 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="alert alert-danger" role="alert" *ngIf="entries.length == 0">
+   Usted no posee una cuenta asociada, haga <a href="/accounts/add" class="alert-link">Click Aquí</a> para agregar una
 </div>

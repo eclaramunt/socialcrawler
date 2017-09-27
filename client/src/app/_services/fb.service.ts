@@ -30,7 +30,6 @@ export class fbService {
   addFacebook(): void {
     this.fb.login({ scope: "user_posts", enable_profile_selector: true })
       .then((response: LoginResponse) => {
-        console.log(response.authResponse);
         //Obtenida la respuesta, añado la cuenta al servidor
         this.accountService.addAccount({
           type: 'facebook',
@@ -60,7 +59,7 @@ export class fbService {
   }
 
   me() {
-    return this.fb.api('me?fields=posts.limit(5)')
+    return this.fb.api('me?fields=posts.limit(7)')
       .then(res => res.posts)
       .catch(e => console.log(e));
   }

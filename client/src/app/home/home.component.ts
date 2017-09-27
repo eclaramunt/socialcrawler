@@ -1,3 +1,4 @@
+import { attachEmbeddedView } from '@angular/core/src/view';
 import { Component, OnInit } from '@angular/core';
 import { Account } from '../_models/account';
 import { fbService } from '../_services/fb.service';
@@ -27,6 +28,7 @@ export class HomeComponent implements OnInit {
                 // obtengo los attachments para este entry
                 this.facebookService.attachments(entry.id).then(attachments => {
                   this.entries.push({
+                    type: 'facebook',
                     title: entry.message,
                     attachments: attachments,
                     created_at: entry.created_time
@@ -38,7 +40,17 @@ export class HomeComponent implements OnInit {
         } else {
           // se trata de una cuenta de twitter
           this.twitter.getTwitters().subscribe(res => {
-            console.log(res);
+            res.forEach((entry) => {
+              let attachments = []
+              if (entry.entities.media) {
+                attachments = [entry.entities.media[0].media_url]
+                this.entries.push({
+                  type: 'twitter',
+                  title: entry.text,
+                  attachments: attachments,
+                })
+              }
+            })
           })
         }
       })

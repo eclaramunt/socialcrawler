@@ -120,8 +120,6 @@ passport.use(new TwitterStrategy({
       logger.error(error)
       return cb(error)
     }
-    console.log('el user que encontre es')
-    console.log(users)
     if (!users.length) {
       logger.error('No existe el usuario !!')
       return cb(error)
@@ -153,8 +151,6 @@ passport.use(new TwitterStrategy({
           return cb(null, user)
         })
       } else {
-        console.log('la account que encontre es ')
-        console.log(accounts)
         logger.info('Logueando al usuario con su cuenta en Twitter')
         return cb(null, user)
       }

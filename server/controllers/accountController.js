@@ -80,7 +80,6 @@ exports.getTwitters = function (req, res) {
     });
 
     var params = { user_id: cuenta.profile_id };
-    console.log('voy a llamar aca')
     client.get('statuses/home_timeline', params, function (error, tweets, response) {
       console.log(error);
       if (!error) {

@@ -2,13 +2,11 @@
   <table class="table table-bordered" *ngIf="accounts.length > 0">
     <thead>
       <tr>
-        <th>ID</th>
         <th>Tipo</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let account of accounts">
-        <td>{{account._id}}</td>
         <td>{{account.type}}</td>
       </tr>
     </tbody>

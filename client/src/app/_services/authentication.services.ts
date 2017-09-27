@@ -25,8 +25,6 @@ export class AuthenticationService {
     )
       .map((response: Response) => {
         // login successful if there's a jwt token in the response
-        console.log("el response es");
-        console.log(response);
         const token = response.json() && response.json().token;
         const user = response.json() && response.json().user;
         if (token) {
